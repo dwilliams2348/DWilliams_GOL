@@ -176,7 +176,7 @@ namespace DWilliams_GOL
             timer.Enabled = false;
         }
 
-        //When clicked it makes teh universe jump ahead 1 generation
+        //When clicked it makes the universe jump ahead 1 generation
         private void NextButton_Click(object sender, EventArgs e)
         {
             if (randUniverse && generations == 0)
@@ -203,6 +203,7 @@ namespace DWilliams_GOL
                 }
             }
 
+            //updates the status labels at the end of the generation
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
             toolStripStatusLabelAliveCount.Text = "Number of alive cells: " + 0;
 
@@ -346,6 +347,7 @@ namespace DWilliams_GOL
         {
             ModalDialog dia = new ModalDialog(universeX, universeY, timerInterval);
 
+            //if the modal dialog is closed with ok then it updates all of the setting variables
             if (DialogResult.OK == dia.ShowDialog())
             {
                 universeX = dia.xSize;
@@ -435,6 +437,7 @@ namespace DWilliams_GOL
             graphicsPanel1.Invalidate();
         }
 
+        //toggles the displayed information on/off (generation count, number of alive cells, time between generation, size of the universe)
         private void toggleHUDONToolStripMenuItem_Click(object sender, EventArgs e)
         {
             toggleHUD = !toggleHUD;
