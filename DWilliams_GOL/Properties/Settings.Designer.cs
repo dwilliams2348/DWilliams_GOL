@@ -142,5 +142,17 @@ namespace DWilliams_GOL.Properties {
                 this["timerInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool toggleHUD {
+            get {
+                return ((bool)(this["toggleHUD"]));
+            }
+            set {
+                this["toggleHUD"] = value;
+            }
+        }
     }
 }

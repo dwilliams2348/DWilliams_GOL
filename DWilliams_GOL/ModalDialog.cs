@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DWilliams_GOL
@@ -23,6 +16,7 @@ namespace DWilliams_GOL
             xUniverse.Text = xSize.ToString();
             yUniverse.Text = ySize.ToString();
             timerInterval.Text = genInterval.ToString();
+            this.Text = "Settings Menu";
         }
         public ModalDialog(int x, int y, int genInt)
         {

@@ -32,6 +32,7 @@ namespace DWilliams_GOL
         bool toggleGrid = true;
         bool toggleCount = true;
         bool torodialUniverse = true;
+        bool toggleHUD = true;
 
         //timer interval in milliseconds, default is 100
         int timerInterval = 100;
@@ -67,6 +68,7 @@ namespace DWilliams_GOL
             toolStripStatusLabelAliveCount.Text = "Number of alive cells: " + aliveCount.ToString();
 
             graphicsPanel1.Invalidate();
+            this.Update();
         }
 
         // The event called by the timer every Interval milliseconds.
@@ -201,9 +203,10 @@ namespace DWilliams_GOL
                 }
             }
 
+            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            toolStripStatusLabelAliveCount.Text = "Number of alive cells: " + 0;
+
             graphicsPanel1.Invalidate();
-            toolStripStatusLabelGenerations.Invalidate();
-            toolStripStatusLabelAliveCount.Invalidate();
             this.Update();
         }
 
@@ -351,6 +354,9 @@ namespace DWilliams_GOL
 
                 timer.Interval = dia.genInterval;
                 timerInterval = dia.genInterval;
+
+                toolStripStatusLabelGenerationTime.Text = "Time between generations(ms): " + dia.genInterval;
+                toolStripStatusLabelUniverseSize.Text = "Size of current Universe(X: " + dia.xSize + " Y: " + dia.ySize + ")";
             }
 
             graphicsPanel1.Invalidate();
@@ -385,13 +391,13 @@ namespace DWilliams_GOL
 
             if (randUniverse)
             {
-                randomizeUniverseOFFToolStripMenuItem.Text = "Randomize Universe(ON)";
+                randomizeUniverseOFFToolStripMenuItem.Text = "Randomize Universe (ON)";
 
                 RandomUniverse();
             }
             else
             {
-                randomizeUniverseOFFToolStripMenuItem.Text = "Randomize Universe(OFF)";
+                randomizeUniverseOFFToolStripMenuItem.Text = "Randomize Universe (OFF)";
             }
         }
 
@@ -427,6 +433,32 @@ namespace DWilliams_GOL
             }
 
             graphicsPanel1.Invalidate();
+        }
+
+        private void toggleHUDONToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toggleHUD = !toggleHUD;
+
+            if (toggleHUD)
+            {
+                toggleGridONToolStripMenuItem.Text = "Toggle HUD (ON)";
+                toolStripStatusLabelGenerations.Visible = true;
+                toolStripStatusLabelAliveCount.Visible = true;
+                toolStripStatusLabelGenerationTime.Visible = true;
+                toolStripStatusLabelUniverseSize.Visible = true;
+
+                this.Update();
+            }
+            else
+            {
+                toggleGridONToolStripMenuItem.Text = "Toggle HUD (OFF)";
+                toolStripStatusLabelGenerations.Visible = false;
+                toolStripStatusLabelAliveCount.Visible = false;
+                toolStripStatusLabelGenerationTime.Visible = false;
+                toolStripStatusLabelUniverseSize.Visible = false;
+
+                this.Update();
+            }
         }
 
         //changes the color of the living cells in the universe
@@ -618,6 +650,7 @@ namespace DWilliams_GOL
             Properties.Settings.Default["toggleGrid"] = toggleGrid;
             Properties.Settings.Default["toggleCount"] = toggleCount;
             Properties.Settings.Default["torodialUniverse"] = torodialUniverse;
+            Properties.Settings.Default["toggleHUD"] = toggleHUD;
             Properties.Settings.Default["universeX"] = universeX;
             Properties.Settings.Default["universeY"] = universeY;
             Properties.Settings.Default["timerInterval"] = timerInterval;
@@ -635,9 +668,74 @@ namespace DWilliams_GOL
             toggleGrid = (bool)Properties.Settings.Default["toggleGrid"];
             toggleCount = (bool)Properties.Settings.Default["toggleCount"];
             torodialUniverse = (bool)Properties.Settings.Default["torodialUniverse"];
+            toggleHUD = (bool)Properties.Settings.Default["toggleHUD"];
             universeX = (int)Properties.Settings.Default["universeX"];
             universeY = (int)Properties.Settings.Default["universeY"];
             timerInterval = (int)Properties.Settings.Default["timerInterval"];
+
+            universe = new bool[universeX, universeY];
+
+            toolStripStatusLabelGenerationTime.Text = "Time between generations(ms): " + timerInterval;
+            toolStripStatusLabelUniverseSize.Text = "Size of current Universe(X: " + universeX + " Y: " + universeY + ")";
+
+            //this series of if statements sets the text in the context menu to correctly resemble the loaded settings
+            if (toggleHUD)
+            {
+                toggleGridONToolStripMenuItem.Text = "Toggle HUD (ON)";
+                toolStripStatusLabelGenerations.Visible = true;
+                toolStripStatusLabelAliveCount.Visible = true;
+                toolStripStatusLabelGenerationTime.Visible = true;
+                toolStripStatusLabelUniverseSize.Visible = true;
+            }
+            else
+            {
+                toggleGridONToolStripMenuItem.Text = "Toggle HUD (OFF)";
+                toolStripStatusLabelGenerations.Visible = false;
+                toolStripStatusLabelAliveCount.Visible = false;
+                toolStripStatusLabelGenerationTime.Visible = false;
+                toolStripStatusLabelUniverseSize.Visible = false;
+            }
+
+            if (torodialUniverse)
+            {
+                universeTypeTorodialToolStripMenuItem.Text = "Universe Type (Torodial)";
+                universeTypeTorodialToolStripMenuItem.ToolTipText = "Torodial universe has edges that wrap around to the other side.";
+            }
+            else
+            {
+                universeTypeTorodialToolStripMenuItem.Text = "Universe Type (Finite)";
+                universeTypeTorodialToolStripMenuItem.ToolTipText = "Finite universe has boundaries on the edges of the map.";
+            }
+
+            if (randUniverse)
+            {
+                randomizeUniverseOFFToolStripMenuItem.Text = "Randomize Universe (ON)";
+            }
+            else
+            {
+                randomizeUniverseOFFToolStripMenuItem.Text = "Randomize Universe (OFF)";
+            }
+
+            if (toggleCount)
+            {
+                toggleNeighborCountONToolStripMenuItem.Text = "Toggle Neighbor Count (ON)";
+            }
+            else
+            {
+                toggleNeighborCountONToolStripMenuItem.Text = "Toggle Neighbor Count (OFF)";
+            }
+
+            if (toggleGrid)
+            {
+                toggleGridONToolStripMenuItem.Text = "Toggle Grid (ON)";
+            }
+            else
+            {
+                toggleGridONToolStripMenuItem.Text = "Toggle Grid (OFF)";
+            }
+
+            graphicsPanel1.Invalidate();
+            this.Update();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -658,9 +756,8 @@ namespace DWilliams_GOL
         private void resetButton_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Reset();
-
-            graphicsPanel1.Invalidate();
-            this.Update();
+            Properties.Settings.Default.Save();
+            LoadUserSettings();
         }
     }
 }

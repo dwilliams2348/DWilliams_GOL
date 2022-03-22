@@ -79,6 +79,9 @@ namespace DWilliams_GOL
             this.graphicsPanel1 = new DWilliams_GOL.GraphicsPanel();
             this.revertButton = new System.Windows.Forms.ToolStripButton();
             this.resetButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripStatusLabelGenerationTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelUniverseSize = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toggleHUDONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -93,7 +96,7 @@ namespace DWilliams_GOL
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(573, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(741, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -264,7 +267,7 @@ namespace DWilliams_GOL
             this.helpToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(573, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(741, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -360,10 +363,12 @@ namespace DWilliams_GOL
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelGenerations,
-            this.toolStripStatusLabelAliveCount});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 323);
+            this.toolStripStatusLabelAliveCount,
+            this.toolStripStatusLabelGenerationTime,
+            this.toolStripStatusLabelUniverseSize});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 422);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(573, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(741, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -386,10 +391,11 @@ namespace DWilliams_GOL
             this.toggleNeighborCountONToolStripMenuItem,
             this.toggleGridONToolStripMenuItem,
             this.randomizeUniverseOFFToolStripMenuItem,
+            this.toggleHUDONToolStripMenuItem,
             this.colorSettingsToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(228, 136);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(228, 180);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // universeTypeTorodialToolStripMenuItem
@@ -417,7 +423,7 @@ namespace DWilliams_GOL
             // 
             this.randomizeUniverseOFFToolStripMenuItem.Name = "randomizeUniverseOFFToolStripMenuItem";
             this.randomizeUniverseOFFToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.randomizeUniverseOFFToolStripMenuItem.Text = "Randomize Universe(OFF)";
+            this.randomizeUniverseOFFToolStripMenuItem.Text = "Randomize Universe (OFF)";
             this.randomizeUniverseOFFToolStripMenuItem.Click += new System.EventHandler(this.randomizeUniverseOFFToolStripMenuItem_Click);
             // 
             // colorSettingsToolStripMenuItem
@@ -464,7 +470,7 @@ namespace DWilliams_GOL
             this.graphicsPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphicsPanel1.Location = new System.Drawing.Point(0, 49);
             this.graphicsPanel1.Name = "graphicsPanel1";
-            this.graphicsPanel1.Size = new System.Drawing.Size(573, 274);
+            this.graphicsPanel1.Size = new System.Drawing.Size(741, 373);
             this.graphicsPanel1.TabIndex = 3;
             this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
             this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
@@ -491,11 +497,30 @@ namespace DWilliams_GOL
             this.resetButton.ToolTipText = "Resets settings to default";
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
+            // toolStripStatusLabelGenerationTime
+            // 
+            this.toolStripStatusLabelGenerationTime.Name = "toolStripStatusLabelGenerationTime";
+            this.toolStripStatusLabelGenerationTime.Size = new System.Drawing.Size(194, 17);
+            this.toolStripStatusLabelGenerationTime.Text = "Time between generations(ms): 100";
+            // 
+            // toolStripStatusLabelUniverseSize
+            // 
+            this.toolStripStatusLabelUniverseSize.Name = "toolStripStatusLabelUniverseSize";
+            this.toolStripStatusLabelUniverseSize.Size = new System.Drawing.Size(191, 17);
+            this.toolStripStatusLabelUniverseSize.Text = "Size of current Universe(X: 25 Y: 25)";
+            // 
+            // toggleHUDONToolStripMenuItem
+            // 
+            this.toggleHUDONToolStripMenuItem.Name = "toggleHUDONToolStripMenuItem";
+            this.toggleHUDONToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.toggleHUDONToolStripMenuItem.Text = "Toggle HUD (ON)";
+            this.toggleHUDONToolStripMenuItem.Click += new System.EventHandler(this.toggleHUDONToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(573, 345);
+            this.ClientSize = new System.Drawing.Size(741, 444);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.graphicsPanel1);
             this.Controls.Add(this.statusStrip1);
@@ -568,6 +593,9 @@ namespace DWilliams_GOL
         private System.Windows.Forms.ToolStripMenuItem universeTypeTorodialToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton revertButton;
         private System.Windows.Forms.ToolStripButton resetButton;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelGenerationTime;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUniverseSize;
+        private System.Windows.Forms.ToolStripMenuItem toggleHUDONToolStripMenuItem;
     }
 }
 
