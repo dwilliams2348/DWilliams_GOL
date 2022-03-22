@@ -710,6 +710,8 @@ namespace DWilliams_GOL
             if (randUniverse)
             {
                 randomizeUniverseOFFToolStripMenuItem.Text = "Randomize Universe (ON)";
+
+                RandomUniverse();
             }
             else
             {
